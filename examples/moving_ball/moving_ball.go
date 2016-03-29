@@ -9,6 +9,8 @@ import (
 var window_x_size int = 800
 var window_y_size int = 400
 
+var boxSize int32 = 50
+
 func main() {
 	sdl.Init(sdl.INIT_EVERYTHING)
 	var event sdl.Event
@@ -53,10 +55,20 @@ func main() {
 
 func drawBackground(s *sdl.Surface) {
 	bg := sdl.Rect{0, 0, int32(window_x_size), int32(window_y_size)}
-	s.FillRect(&bg, 0xffffffff)
+	var color uint32 = 0xffffffff
+	s.FillRect(&bg, color)
 }
 
 func drawRect(s *sdl.Surface, x int32, y int32) {
-	rect := sdl.Rect{x, y, 50, 50}
-	s.FillRect(&rect, 0xffff0000)
+	rect := sdl.Rect{x, y, boxSize, boxSize}
+
+	//Change color of box if it passes half window
+	var color uint32
+	if int(x+(boxSize/2)) > window_y_size/2 {
+		color = 0xffff0000
+	} else {
+		color = 0xff00ff00
+	}
+
+	s.FillRect(&rect, color)
 }
