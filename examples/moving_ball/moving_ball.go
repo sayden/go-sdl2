@@ -11,7 +11,7 @@ func main() {
 	var event sdl.Event
 
 	window, err := sdl.CreateWindow("test", sdl.WINDOWPOS_UNDEFINED, sdl.WINDOWPOS_UNDEFINED,
-		800, 50, sdl.WINDOW_SHOWN)
+		800, 400, sdl.WINDOW_SHOWN)
 	if err != nil {
 		panic(err)
 	}
@@ -24,11 +24,14 @@ func main() {
 
 	running := true
 	var x_pos int32 = 0
+	var y_pos int32 = 0
+
 	for running {
 		drawBackground(surface)
-		drawRect(surface, x_pos, 0)
+		drawRect(surface, x_pos, y_pos)
 		window.UpdateSurface()
 		x_pos += 1
+		y_pos += 1
 		time.Sleep(10 * time.Millisecond)
 
 		//Events catcher
@@ -46,7 +49,7 @@ func main() {
 }
 
 func drawBackground(s *sdl.Surface) {
-	bg := sdl.Rect{0, 0, 800, 50}
+	bg := sdl.Rect{0, 0, 800, 400}
 	s.FillRect(&bg, 0xffffffff)
 }
 
