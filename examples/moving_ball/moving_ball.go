@@ -6,12 +6,15 @@ import (
 	"time"
 )
 
+var window_x_size int = 800
+var window_y_size int = 400
+
 func main() {
 	sdl.Init(sdl.INIT_EVERYTHING)
 	var event sdl.Event
 
 	window, err := sdl.CreateWindow("test", sdl.WINDOWPOS_UNDEFINED, sdl.WINDOWPOS_UNDEFINED,
-		800, 400, sdl.WINDOW_SHOWN)
+		window_x_size, window_y_size, sdl.WINDOW_SHOWN)
 	if err != nil {
 		panic(err)
 	}
@@ -49,7 +52,7 @@ func main() {
 }
 
 func drawBackground(s *sdl.Surface) {
-	bg := sdl.Rect{0, 0, 800, 400}
+	bg := sdl.Rect{0, 0, int32(window_x_size), int32(window_y_size)}
 	s.FillRect(&bg, 0xffffffff)
 }
 
